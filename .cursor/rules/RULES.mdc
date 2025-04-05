@@ -1,0 +1,122 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Rules and Guidelines
+
+## Overview
+This document outlines the rules, guidelines, and technologies for our SaaS application. Our goal is to build a high-quality, maintainable, and accessible application using modern front-end technologies with a focus on clarity and best practices.
+
+---
+
+## Technologies & Tools
+
+- **Frameworks & Libraries**
+  - **ReactJS:** Our core library for building the UI.
+  - **NextJS:** Part of the SaaS Starter template for advanced features and server-side rendering.
+  - **JavaScript / TypeScript:** Primary languages for code implementation.
+  - **HTML & CSS:** Markup and styling fundamentals.
+  - **TailwindCSS:** Utility-first CSS framework for rapid styling.
+  - **ShadCN UI:** Pre-built, customizable UI components to speed up development.
+  - **Radix UI:** For accessible UI primitives if needed.
+
+- **Backend & Integration**
+  - **Supabase:** Backend-as-a-service providing PostgreSQL, authentication, and Edge Functions.
+  - **NextJS API Routes / Edge Functions:** For custom backend logic (e.g., Pay Certainty Test evaluation).
+
+- **Build & Deployment Tools**
+  - **Vite:** (Optional if using NextJS template, but noted for Vite projects) for a fast development server.
+  - **Netlify/Vercel:** Deployment platforms.
+  - **Git:** Version control system.
+
+---
+
+## Coding Environment
+
+We will work in an environment that leverages:
+- **ReactJS & NextJS** for component-based development.
+- **JavaScript & TypeScript** for code robustness and type safety.
+- **TailwindCSS** for styling, ensuring rapid and consistent design.
+- **HTML & CSS** where needed (preferably using Tailwind classes).
+- **Modern UI/UX frameworks** like ShadCN and Radix for accessible, pre-built components.
+
+---
+
+## Code Implementation Guidelines
+
+When writing code, follow these rules:
+
+1. **General Practices**
+   - **Follow Requirements:** Adhere strictly to user requirements.
+   - **Plan Before Coding:** Start by writing detailed pseudocode, outlining what to build step-by-step.
+   - **Confirm Before Implementation:** Ensure the pseudocode aligns with requirements, then write the final code.
+   - **Best Practices & DRY:** Write correct, best-practice, DRY (Don't Repeat Yourself), bug-free, and fully functional code.
+   - **No TODOs or Placeholders:** The code should be complete with no missing pieces.
+   - **Accessibility:** Implement accessibility features (e.g., proper `aria-label`, `tabindex`, keyboard events) on interactive elements.
+
+2. **Specific Code Rules**
+   - **Early Returns:** Use early returns where possible to simplify logic.
+   - **Descriptive Naming:** Use descriptive variable and function names. Prefix event handlers with `handle` (e.g., `handleClick`).
+   - **Tailwind for Styling:** Use Tailwind CSS classes exclusively for styling elements. Avoid inline CSS or additional style tags.
+   - **Class Binding:** Use the syntax `class:` (or similar patterns provided by your framework) to conditionally add Tailwind classes.
+   - **Constants Over Functions:** Use `const` declarations for functions (e.g., `const toggle = () => { ... }`) and define types where possible.
+   - **Imports:** Include all required imports at the top of each file. Ensure no missing or redundant imports.
+
+3. **Accessibility & UI/UX**
+   - Ensure all interactive elements (buttons, links, etc.) include:
+     - `tabindex="0"`
+     - `aria-label` with a clear description.
+     - Both `onClick` and `onKeyDown` event handlers to support keyboard interactions.
+   - Favor clarity and readability in code and UI over micro-optimizations.
+
+---
+
+## Pseudocode Plan for the Application
+
+1. **Authentication Flow**
+   - **Check User Auth:** On app load, check if the user is authenticated using Supabase Auth.
+   - **Show Login/Signup:** If not authenticated, display a login/sign-up page.
+   - **Store User Session:** On successful login, store the user session and proceed to the main interface.
+
+2. **Idea Submission**
+   - **Form Component:**
+     - Display a form with a text area for "nugget" input.
+     - Include a submit button.
+     - Validate the input to ensure it's not empty.
+   - **Submission Handler:**
+     - On submit, call the Supabase Edge Function (or API route) to evaluate the idea.
+     - Receive a response containing the `pay_certainty_score` and `quadrant`.
+     - Update local state with the returned idea data.
+
+3. **Demand Matrix Visualization**
+   - **Matrix Component:**
+     - Create a 2x2 grid representing the four quadrants: High End, Golden Goose, Mass Market, and Labor of Love.
+     - Display each idea in its corresponding quadrant.
+     - Use Tailwind CSS and ShadCN UI components for a clean layout.
+   - **Interactivity:**
+     - Allow users to click on an idea for more details.
+     - Ensure keyboard navigation for accessibility.
+
+4. **Data Fetching & Display**
+   - **On Load:** Fetch all ideas for the logged-in user from Supabase.
+   - **Real-time Updates (optional):** Subscribe to changes in the ideas table to update the matrix dynamically.
+   - **Error Handling:** Implement error handling for network or data errors.
+
+5. **Deployment & Environment Configuration**
+   - **Environment Variables:** Configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local` and the deployment platform.
+   - **Deployment:** Use Netlify/Vercel to deploy the NextJS app.
+   - **Maintenance:** Monitor logs and update dependencies regularly.
+
+---
+
+## Final Thoughts
+
+This rules file serves as our blueprint for building the SaaS application. By following the above guidelines and pseudocode plan, we ensure a consistent, high-quality codebase that meets all the requirements.
+
+Remember:
+- **Plan carefully, confirm, then code.**
+- **Write clear, accessible, and maintainable code.**
+- **Utilize modern tools and libraries to speed up development and ensure best practices.**
+
+Happy coding, and let’s build something great!
